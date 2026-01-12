@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart – Hexa Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="top-banner">
+        WINTER CLEARANCE 50% OFF EVERYTHING
+    </div>
+
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">HEXA STORE</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">New Arrivals</a></li>
+        </ul>
+        <div class="icons">
+            <a href="cart.html" class="icon cart-icon">
+                🛒 <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <section class="section-title">
+        <h2>YOUR CART</h2>
+    </section>
+
+    <section class="cart-wrapper">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- JS populates rows -->
+            </tbody>
+        </table>
+
+        <div class="cart-summary">
+            <p>Total: <span id="cart-total">£0.00</span></p>
+            <button id="cart-checkout" class="btn-primary">
+                Proceed to Checkout
+            </button>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
