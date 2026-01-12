@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout – Hexa Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="top-banner">
+        WINTER CLEARANCE 50% OFF EVERYTHING
+    </div>
+
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">HEXA STORE</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">New Arrivals</a></li>
+        </ul>
+        <div class="icons">
+            <a href="cart.html" class="icon cart-icon">
+                🛒 <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <section class="section-title">
+        <h2>CHECKOUT</h2>
+    </section>
+
+    <section class="checkout-wrapper">
+        <div class="checkout-summary">
+            <h3>Order Summary</h3>
+            <ul id="checkout-summary-list">
+                <!-- JS inserts items -->
+            </ul>
+            <p class="checkout-total">
+                Total: <span id="checkout-total">£0.00</span>
+            </p>
+        </div>
+
+        <form id="checkout-form" class="checkout-form">
+            <h3>Billing Details</h3>
+
+            <label>
+                Full Name
+                <input type="text" required>
+            </label>
+
+            <label>
+                Email
+                <input type="email" required>
+            </label>
+
+            <label>
+                Address
+                <input type="text" required>
+            </label>
+
+            <label>
+                City
+                <input type="text" required>
+            </label>
+
+            <label>
+                Payment Method
+                <select required>
+                    <option value="">Select...</option>
+                    <option value="cod">Cash on Delivery</option>
+                    <option value="card">Credit/Debit Card (demo)</option>
+                </select>
+            </label>
+
+            <button type="submit" class="btn-primary">
+                Place Order
+            </button>
+        </form>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
