@@ -346,3 +346,37 @@ a {
         grid-template-columns: 1fr;
     }
 }
+.viewer-360 {
+  width: 450px;
+  max-width: 100%;
+  height: 340px;
+  background: #fff;
+  border: 1px solid #e0dfd7;
+  border-radius: 8px;
+  cursor: grab;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-360 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.viewer-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(45, 58, 39, 0.85);
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+}
