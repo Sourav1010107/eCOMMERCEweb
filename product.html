@@ -1,1 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product – Hexa Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
+<body>
+  <div class="top-banner">WINTER CLEARANCE 50% OFF EVERYTHING</div>
+
+  <nav class="navbar">
+    <div class="logo"><a href="index.html">HEXA STORE</a></div>
+    <ul class="nav-links">
+      <li><a href="index.html">New Arrivals</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+    <div class="icons">
+      <a href="cart.html" class="icon cart-icon">🛒 <span class="cart-count">0</span></a>
+    </div>
+  </nav>
+
+  <section class="product-detail-wrapper">
+    <div class="product-detail">
+
+      <!-- ✅ 360 Viewer -->
+      <div class="product-detail-image">
+        <div class="viewer-360" id="viewer360">
+          <img id="product360" src="images/360/product_01.jpg" alt="360 Product View" />
+          <div class="viewer-hint">Drag to rotate</div>
+        </div>
+      </div>
+
+      <!-- Product info -->
+      <div class="product-detail-info">
+        <span class="sale-badge">JANUARY SALE</span>
+        <h1 id="detail-name">Leather Deep Box File</h1>
+        <p id="detail-description">
+          Premium leather accessory. Drag the product image to view 360°.
+        </p>
+
+        <p class="price">
+          <span class="new-price" id="detail-price">£99.50</span>
+          <span class="old-price" id="detail-oldprice">£199.00</span>
+        </p>
+
+        <div class="detail-actions">
+          <button id="detail-add" class="btn-primary">Add to Cart</button>
+          <button id="detail-buy" class="btn-outline">Buy Now</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    // -------------------------
+    // ✅ 360 Viewer (Frame-by-frame)
+    // -------------------------
+    const totalFrames = 36;          // change if you have 24/48/etc.
+    let currentFrame = 1;
+    let isDragging = false;
+    let startX = 0;
+
+    const img360 = document.getElementById("product360");
+    const viewer = document.getElementById("viewer360");
+
+    function updateImage(frame) {
+      img360.src = `images/360/product_${String(frame).padStart(2, "0")}.jpg`;
+    }
+
+    // Mouse drag
+    viewer.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      viewer.style.cursor = "grabbing";
+    });
+
+    window.addEventListener("mouseup", () => {
+      isDragging = false;
+      viewer.style.cursor = "grab";
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+
+      const delta = e.clientX - startX;
+
+      if (Math.abs(delta) > 10) {
+        // Drag right -> show previous frame, drag left -> next frame
+        currentFrame += delta > 0 ? -1 : 1;
+
+        if (currentFrame < 1) currentFrame = totalFrames;
+        if (currentFrame > totalFrames) currentFrame = 1;
+
+        updateImage(currentFrame);
+        startX = e.clientX;
+      }
+    });
+
+    // Touch drag (mobile)
+    viewer.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    viewer.addEventListener("touchmove", (e) => {
+      const delta = e.touches[0].clientX - startX;
+
+      if (Math.abs(delta) > 10) {
+        currentFrame += delta > 0 ? -1 : 1;
+
+        if (currentFrame < 1) currentFrame = totalFrames;
+        if (currentFrame > totalFrames) currentFrame = 1;
+
+        updateImage(currentFrame);
+        startX = e.touches[0].clientX;
+      }
+    });
+
+    // -------------------------
+    // ✅ Simple Cart (localStorage)
+    // -------------------------
+    function loadCart() {
+      try { return JSON.parse(localStorage.getItem("hexa_cart")) || []; }
+      catch { return []; }
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem("hexa_cart", JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const cart = loadCart();
+      const count = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.querySelectorAll(".cart-count").forEach(el => el.textContent = count);
+    }
+
+    // Example product (you can replace or load dynamically)
+    const product = {
+      id: 1,
+      name: "Leather Deep Box File",
+      price: 99.5
+    };
+
+    function addToCart(productId, qty = 1) {
+      const cart = loadCart();
+      const existing = cart.find(i => i.id === productId);
+
+      if (existing) existing.qty += qty;
+      else cart.push({ id: productId, qty });
+
+      saveCart(cart);
+      updateCartCount();
+    }
+
+    document.getElementById("detail-add").addEventListener("click", () => {
+      addToCart(product.id, 1);
+      alert("Added to cart!");
+    });
+
+    document.getElementById("detail-buy").addEventListener("click", () => {
+      addToCart(product.id, 1);
+      window.location.href = "checkout.html";
+    });
+
+    // init
+    updateCartCount();
+  </script>
+
+</body>
+</html>
