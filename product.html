@@ -27,7 +27,7 @@
       <!-- ✅ 360 Viewer -->
       <div class="product-detail-image">
         <div class="viewer-360" id="viewer360">
-          <img id="product360" src="images/360/fr01.jpg" alt="360 Product View" />
+          <img id="product360" src="images/360/fr01.jpeg" alt="360 Product View" />
           <div class="viewer-hint">Drag to rotate</div>
         </div>
       </div>
@@ -67,7 +67,7 @@
     const viewer = document.getElementById("viewer360");
 
     function updateImage(frame) {
-      img360.src = `images/360/fr${String(frame).padStart(2, "0")}.jpg`;
+      img360.src = `images/360/fr${String(frame).padStart(2, "0")}.jpeg`;
     }
 
     // Mouse drag
